@@ -6,9 +6,9 @@ return {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
+      'L3MON4D3/LuaSnip',
 
       -- Useful status updates for LSP.
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
 
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -120,15 +120,15 @@ return {
         tsserver = {
           settings = {},
         },
-        eslint = {
-          settings = {
-            codeActionsOnSave = {
-              enable = true,
-              mode = 'all',
-            },
-            format = true,
-          },
-        },
+        -- eslint = {
+        --   settings = {
+        --     codeActionsOnSave = {
+        --       enable = true,
+        --       mode = 'all',
+        --     },
+        --     format = true,
+        --   },
+        -- },
 
         lua_ls = {
           -- cmd = {...},

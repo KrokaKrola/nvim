@@ -9,7 +9,11 @@ return {
     config = function()
       local nvm_tree = require 'nvim-tree'
 
-      nvm_tree.setup()
+      nvm_tree.setup {
+        view = {
+          side = 'right',
+        },
+      }
 
       local api = require 'nvim-tree.api'
 

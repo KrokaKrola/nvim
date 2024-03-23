@@ -11,6 +11,10 @@ return {
         yaml = { 'yamllint' },
         terraform = { 'tflint' },
         dockerfile = { 'hadolint' },
+        -- javascript = { 'eslint' },
+        -- typescript = { 'eslint' },
+        -- javascriptreact = { 'eslint' },
+        -- typescriptreact = { 'eslint' },
       }
 
       local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
