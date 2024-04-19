@@ -9,6 +9,9 @@ vim.g.have_nerd_font = true
 -- vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- hybryd line numbers
+vim.opt.nu = true
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
@@ -61,3 +64,5 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Autoread files when changed outside of Neovim
 vim.opt.autoread = true
+
+vim.opt.tabstop = 4

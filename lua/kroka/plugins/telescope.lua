@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return {}
+end
+
 return {
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',

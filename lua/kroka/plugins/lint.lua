@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return {}
+end
+
 return {
   { -- linting
     'mfussenegger/nvim-lint',
@@ -6,11 +10,10 @@ return {
       local lint = require 'lint'
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
-        json = { 'jsonlint' },
-        csv = { 'csvlint' },
-        yaml = { 'yamllint' },
-        terraform = { 'tflint' },
-        dockerfile = { 'hadolint' },
+        -- csv = { 'csvlint' },
+        -- yaml = { 'yamllint' },
+        -- terraform = { 'tflint' },
+        -- dockerfile = { 'hadolint' },
         -- javascript = { 'eslint' },
         -- typescript = { 'eslint' },
         -- javascriptreact = { 'eslint' },
