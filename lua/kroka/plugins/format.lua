@@ -19,9 +19,8 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
+        -- Python: ruff handles both formatting and import sorting
+        python = { 'ruff_organize_imports', 'ruff_format' },
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         go = { 'goimports', 'gofmt' },

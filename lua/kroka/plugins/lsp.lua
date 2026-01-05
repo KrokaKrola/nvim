@@ -113,7 +113,7 @@ return {
       local servers = {
         -- clangd = {},
         gopls = {},
-        -- pyright = {},
+        ts_ls = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -121,9 +121,9 @@ return {
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {
-          settings = {},
-        },
+        -- tsserver = {
+        --   settings = {},
+        -- },
         -- eslint = {
         --   settings = {
         --     codeActionsOnSave = {
@@ -133,6 +133,32 @@ return {
         --     format = true,
         --   },
         -- },
+
+        -- Python LSP
+        pyright = {
+          settings = {
+            pyright = {
+              -- Use ruff for import organization
+              disableOrganizeImports = true,
+            },
+            python = {
+              analysis = {
+                typeCheckingMode = 'basic',
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                diagnosticMode = 'openFilesOnly',
+              },
+            },
+          },
+        },
+
+        -- Ruff LSP for fast Python linting and formatting
+        ruff = {
+          on_attach = function(client, _)
+            -- Disable hover in favor of pyright
+            client.server_capabilities.hoverProvider = false
+          end,
+        },
 
         lua_ls = {
           -- cmd = {...},
@@ -163,6 +189,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'debugpy', -- Python debugger
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
