@@ -9,7 +9,7 @@ return {
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
+        -- markdown = { 'markdownlint' },
         -- Python: ruff is a fast linter (note: ruff LSP already provides linting,
         -- so this is optional/redundant if you have ruff LSP enabled)
         python = { 'ruff' },
@@ -24,7 +24,7 @@ return {
       }
 
       local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost' }, {
         group = lint_augroup,
         callback = function()
           -- Don't lint in floating windows (like hover docs) or special buffers

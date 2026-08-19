@@ -13,9 +13,6 @@ nnoremap <silent> <C-w>_ :<C-u>call VSCodeNotify('workbench.action.toggleEditorW
 nnoremap <silent> <Space> :call VSCodeNotify('whichkey.show')<CR>
 xnoremap <silent> <Space> :call VSCodeNotify('whichkey.show')<CR>
 
-" Normal mode non-recursive mappings
-" Delete a line with <leader>d
-nnoremap <leader>d dd
 
 " Focus the terminal with <leader>i
 nnoremap <leader>j :call VSCodeNotify('workbench.action.terminal.focus')<CR>
@@ -43,3 +40,4 @@ nnoremap <leader>l :call VSCodeNotify('workbench.action.focusSecondEditorGroup')
 nnoremap <C-n> :call VSCodeNotify(':nohl')<CR>
 
 " nnoremap <leader>e :call VSCodeNotify('workbench.veiw.explorer')<CR>
+

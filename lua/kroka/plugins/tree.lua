@@ -16,6 +16,7 @@ return {
       nvm_tree.setup {
         view = {
           side = 'right',
+          preserve_window_proportions = true,
         },
       }
 
