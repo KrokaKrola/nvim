@@ -1,9 +1,9 @@
-require 'kroka'
+require 'kroka_2025'
 
 if vim.g.vscode then
   vim.cmd 'source $HOME/.config/nvim/vscode/settings.vim'
   vim.keymap.set('n', '<leader>dx', function()
-    require('vscode').action('workbench.debug.viewlet.action.disableAllBreakpoints')
+    require('vscode').action 'workbench.debug.viewlet.action.disableAllBreakpoints'
   end, { desc = 'Debug: Remove All Breakpoints' })
 end
 

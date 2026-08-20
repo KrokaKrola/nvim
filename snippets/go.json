@@ -1,0 +1,86 @@
+{
+  "if err != nil": {
+    "prefix": "iferr",
+    "body": ["if err != nil {", "\treturn ${1:err}", "}"],
+    "description": "if err != nil { return err }"
+  },
+  "if err != nil wrapped": {
+    "prefix": "iferrw",
+    "body": ["if err != nil {", "\treturn fmt.Errorf(\"${1:context}: %w\", err)", "}"],
+    "description": "if err != nil with wrapped error"
+  },
+  "assign and check error": {
+    "prefix": "ace",
+    "body": ["${1:val}, err := ${2:fn}", "if err != nil {", "\treturn fmt.Errorf(\"${3:context}: %w\", err)", "}", "$0"],
+    "description": "assign, check and wrap error"
+  },
+  "table driven test": {
+    "prefix": "ttest",
+    "body": [
+      "func Test${1:Name}(t *testing.T) {",
+      "\ttests := []struct {",
+      "\t\tname string",
+      "\t\t${2:input} ${3:string}",
+      "\t\twant ${4:string}",
+      "\t}{",
+      "\t\t{name: \"${5:case}\", $2: ${6:\"\"}, want: ${7:\"\"}},",
+      "\t}",
+      "",
+      "\tfor _, tt := range tests {",
+      "\t\tt.Run(tt.name, func(t *testing.T) {",
+      "\t\t\tgot := ${8:fn}(tt.$2)",
+      "\t\t\tif got != tt.want {",
+      "\t\t\t\tt.Errorf(\"got %v, want %v\", got, tt.want)",
+      "\t\t\t}",
+      "\t\t})",
+      "\t}",
+      "}"
+    ],
+    "description": "table driven test"
+  },
+  "subtest": {
+    "prefix": "trun",
+    "body": ["t.Run(\"${1:name}\", func(t *testing.T) {", "\t$0", "})"],
+    "description": "t.Run subtest"
+  },
+  "context with timeout": {
+    "prefix": "ctxt",
+    "body": ["ctx, cancel := context.WithTimeout(${1:context.Background()}, ${2:5}*time.Second)", "defer cancel()", "$0"],
+    "description": "context with timeout"
+  },
+  "context with cancel": {
+    "prefix": "ctxc",
+    "body": ["ctx, cancel := context.WithCancel(${1:context.Background()})", "defer cancel()", "$0"],
+    "description": "context with cancel"
+  },
+  "goroutine with waitgroup": {
+    "prefix": "gowg",
+    "body": ["var wg sync.WaitGroup", "for _, ${1:item} := range ${2:items} {", "\twg.Add(1)", "\tgo func($1 ${3:string}) {", "\t\tdefer wg.Done()", "\t\t$0", "\t}($1)", "}", "wg.Wait()"],
+    "description": "goroutine with WaitGroup"
+  },
+  "errgroup": {
+    "prefix": "errg",
+    "body": ["g, ctx := errgroup.WithContext(${1:ctx})", "for _, ${2:item} := range ${3:items} {", "\tg.Go(func() error {", "\t\t$0", "\t\treturn nil", "\t})", "}", "if err := g.Wait(); err != nil {", "\treturn err", "}"],
+    "description": "errgroup with context"
+  },
+  "benchmark": {
+    "prefix": "bench",
+    "body": ["func Benchmark${1:Name}(b *testing.B) {", "\tfor b.Loop() {", "\t\t$0", "\t}", "}"],
+    "description": "benchmark function"
+  },
+  "struct with json tags": {
+    "prefix": "stj",
+    "body": ["type ${1:Name} struct {", "\t${2:Field} ${3:string} `json:\"${4:field}\"`", "}"],
+    "description": "struct with json tags"
+  },
+  "interface": {
+    "prefix": "iface",
+    "body": ["type ${1:Name} interface {", "\t${2:Method}(${3}) ${4:error}", "}"],
+    "description": "interface declaration"
+  },
+  "slog error": {
+    "prefix": "sloge",
+    "body": ["slog.Error(\"${1:message}\", \"error\", err${2:, \"${3:key}\", ${4:value}})"],
+    "description": "slog.Error with error"
+  }
+}

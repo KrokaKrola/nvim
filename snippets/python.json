@@ -1,0 +1,148 @@
+{
+  "typed function": {
+    "prefix": "fnt",
+    "body": [
+      "def ${1:name}(${2:arg}: ${3:str}) -> ${4:None}:",
+      "\t\"\"\"${5:summary}\"\"\"",
+      "\t$0"
+    ],
+    "description": "typed function with docstring"
+  },
+  "async function": {
+    "prefix": "adef",
+    "body": [
+      "async def ${1:name}(${2}) -> ${3:None}:",
+      "\t$0"
+    ],
+    "description": "async function"
+  },
+  "dataclass": {
+    "prefix": "dcls",
+    "body": [
+      "@dataclass",
+      "class ${1:Name}:",
+      "\t${2:field}: ${3:str}",
+      "\t$0"
+    ],
+    "description": "dataclass"
+  },
+  "frozen dataclass": {
+    "prefix": "dclsf",
+    "body": [
+      "@dataclass(frozen=True, slots=True)",
+      "class ${1:Name}:",
+      "\t${2:field}: ${3:str}",
+      "\t$0"
+    ],
+    "description": "frozen dataclass with slots"
+  },
+  "pydantic model": {
+    "prefix": "pyd",
+    "body": [
+      "class ${1:Name}(BaseModel):",
+      "\t${2:field}: ${3:str}",
+      "\t$0"
+    ],
+    "description": "pydantic BaseModel"
+  },
+  "enum": {
+    "prefix": "enum",
+    "body": [
+      "class ${1:Name}(StrEnum):",
+      "\t${2:MEMBER} = \"${3:value}\"",
+      "\t$0"
+    ],
+    "description": "StrEnum class"
+  },
+  "pytest test": {
+    "prefix": "test",
+    "body": [
+      "def test_${1:name}() -> None:",
+      "\t$0",
+      "\tassert ${2:actual} == ${3:expected}"
+    ],
+    "description": "pytest test function"
+  },
+  "pytest parametrize": {
+    "prefix": "param",
+    "body": [
+      "@pytest.mark.parametrize(",
+      "\t(\"${1:arg}\", \"expected\"),",
+      "\t[",
+      "\t\t(${2:input}, ${3:output}),",
+      "\t],",
+      ")",
+      "def test_${4:name}($1: ${5:str}, expected: ${6:str}) -> None:",
+      "\tassert ${7:fn}($1) == expected"
+    ],
+    "description": "pytest parametrized test"
+  },
+  "pytest fixture": {
+    "prefix": "fix",
+    "body": [
+      "@pytest.fixture",
+      "def ${1:name}() -> ${2:None}:",
+      "\t$0"
+    ],
+    "description": "pytest fixture"
+  },
+  "pytest raises": {
+    "prefix": "raises",
+    "body": [
+      "with pytest.raises(${1:ValueError}):",
+      "\t$0"
+    ],
+    "description": "pytest.raises context"
+  },
+  "async main": {
+    "prefix": "amain",
+    "body": [
+      "async def main() -> None:",
+      "\t$0",
+      "",
+      "",
+      "if __name__ == \"__main__\":",
+      "\tasyncio.run(main())"
+    ],
+    "description": "async main entrypoint"
+  },
+  "context manager": {
+    "prefix": "ctxm",
+    "body": [
+      "@contextmanager",
+      "def ${1:name}(${2}) -> Iterator[${3:None}]:",
+      "\t${4:setup}",
+      "\ttry:",
+      "\t\tyield ${5}",
+      "\tfinally:",
+      "\t\t${6:cleanup}"
+    ],
+    "description": "contextmanager generator"
+  },
+  "logger": {
+    "prefix": "log",
+    "body": [
+      "logger = logging.getLogger(__name__)"
+    ],
+    "description": "module logger"
+  },
+  "type alias": {
+    "prefix": "tal",
+    "body": [
+      "type ${1:Name} = ${2:str}"
+    ],
+    "description": "PEP 695 type alias"
+  },
+  "overload": {
+    "prefix": "ovl",
+    "body": [
+      "@overload",
+      "def ${1:name}(${2:arg}: ${3:int}) -> ${4:int}: ...",
+      "@overload",
+      "def $1($2: ${5:str}) -> ${6:str}: ...",
+      "def $1($2: ${3}|${5}) -> ${4}|${6}:",
+      "\t$0"
+    ],
+    "description": "typing overload"
+  }
+}
