@@ -46,36 +46,13 @@ nmap('Q', '<cmd>qa!<CR>', 'Quit without saving')
 -- macro recording, displaced by the q mapping above
 nmap('<leader>q', 'q', 'Record macro')
 
--- Toggle a bottom terminal, reusing the same buffer so shell state survives
-local term = { buf = nil, win = nil }
+local terminal = require 'kroka_2025.terminal'
 
-local function toggle_terminal()
-  -- open: window is gone or was never created
-  if term.win and vim.api.nvim_win_is_valid(term.win) then
-    vim.api.nvim_win_hide(term.win)
-    term.win = nil
-    return
-  end
-
-  vim.cmd 'below 15split'
-  term.win = vim.api.nvim_get_current_win()
-
-  if term.buf and vim.api.nvim_buf_is_valid(term.buf) then
-    vim.api.nvim_win_set_buf(term.win, term.buf)
-  else
-    vim.cmd 'terminal'
-    term.buf = vim.api.nvim_get_current_buf()
-    vim.bo[term.buf].buflisted = false
-  end
-
-  vim.cmd 'startinsert'
-end
-
-nmap('<leader>j', toggle_terminal, 'Toggle terminal')
+nmap('<leader>j', terminal.toggle, 'Toggle terminal')
 -- close from inside the terminal (<leader> is Space, unusable in terminal mode)
 vim.keymap.set('t', '<C-q>', function()
   vim.cmd 'stopinsert'
-  toggle_terminal()
+  terminal.toggle()
 end, { desc = 'Toggle terminal' })
 
 -- window navigation from terminal mode, matching the normal-mode bindings

@@ -45,7 +45,11 @@ vim.fn.sign_define('DapBreakpointCondition', { text = '◆', texthl = 'Diagnosti
 vim.fn.sign_define('DapLogPoint', { text = '◆', texthl = 'DiagnosticInfo' })
 vim.fn.sign_define('DapStopped', { text = '▶', texthl = 'DiagnosticOk', linehl = 'Visual' })
 
-dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+dap.listeners.after.event_initialized['dapui_config'] = function()
+  -- the terminal and the dap-ui panels compete for the bottom split
+  require('kroka_2025.terminal').hide()
+  dapui.open()
+end
 dap.listeners.before.event_terminated['dapui_config'] = dapui.close
 dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
